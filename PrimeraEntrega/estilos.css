@@ -126,7 +126,7 @@ padding: 15px;
 }
 .cartas{
     background-color: #0896a6;
-    width: 150px;
+    max-width: 200px;
     min-height: 240px;
     border-radius: 15px;
     display: flex;
@@ -162,3 +162,42 @@ hr {
 }
 
 /* -- Fin seccion Lista -- */
+
+/* -- Media Queries -- */
+@media (max-width: 800px) {
+    #productos_contenedor {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .cartas {
+        margin: 5px auto;
+    }
+
+    #encabezado_lista {
+        flex-direction: column;
+    }
+
+    #encabezado_lista form {
+        flex-direction: column;
+    }
+
+    .input_group {
+        width: 100%;
+    }
+
+    footer {
+        text-align: center;
+    }
+  }
+  
+  @media (min-width: 800px) and (max-width: 1280px) {
+    .menu {
+      background: red;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .menu {
+      background: green;
+    }
+  }
