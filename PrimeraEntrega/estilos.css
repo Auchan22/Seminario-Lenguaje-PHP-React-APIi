@@ -10,7 +10,8 @@ body {
 
 /* -- Inicio Header -- */
 
-.header img { width: 60px;
+.header img { 
+    width: 60px;
     height: 60px; 
     border-radius: 100%;
 }
@@ -48,12 +49,71 @@ padding: 15px;
     align-items: center;
     justify-content: center;
 }
+/* -- Fin Footer -- */
+
+/* -- Inicio seccion Lista -- */
 
 #listProductos {
     margin-top: 90px;
     padding-top: 10px;
     width: 100vw;
 }
+
+#encabezado_lista {
+    margin: 0px 8vw 30px 8vw;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#encabezado_lista h2 {
+    font-weight: bold;
+}
+
+#encabezado_lista form {
+    background-color: #e3d5ca;
+    border: 1px solid #ece4db;
+    padding: 10px 15px;
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.input_group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input_group label {
+    font-weight: bold;
+}
+
+.input_form {
+    height: 25px;
+}
+
+.btn_submit {
+    min-width: 70px;
+    border-radius: 10px;
+    border: none;
+    height: 40px;
+    padding:5px;
+    font-weight: bold;
+    transition: 125ms all ease-in-out;
+}
+
+.btn_submit:hover {
+    border: 2px solid #fff;
+    cursor: pointer;
+    background-color: #3c6e71;
+    color: #fff;
+    transition: 125ms all ease-in-out;
+    box-shadow: 0px 0px 35px -11px rgba(0,0,0,0.46);
+}
+
 #productosContenedor{
     width: 80%;
     display: grid;
@@ -67,19 +127,38 @@ padding: 15px;
     width: 90%;
     min-height: 240px;
     border-radius: 15px;
-    padding: 10px;
     display: flex;
-    align-items:center;
+    align-items:start;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     gap: 5px;
     box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2);
 }
-.descripcionProducto h3, .descripcionProducto h6{
+
+.descripcion_producto {
+    padding: 10px;
+}
+
+.descripcion_producto h3, .descripcion_producto h5{
     margin: 0px;
 }
-.cartas img{
-    max-width: 90%;
 
+.descripcion_producto h5{
+    color: #024059
 }
-/* -- Fin Footer -- */
+
+.cartas img{
+    width: 100%;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.producto_precio span {
+    font-weight: bold;
+}
+
+hr {
+    max-width: 90vw;
+}
+
+/* -- Fin seccion Lista -- */

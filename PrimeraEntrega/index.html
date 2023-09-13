@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon"
+        href="restaurant-logo-design-template-b281aeadaa832c28badd72c1f6c5caad_screen.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos.css">
     <title>Don Chincho</title>
@@ -16,33 +18,44 @@
         </div>
     </header>
     <section id="listProductos">
+        <div id="encabezado_lista">
+            <h2>Menú</h2>
+            <form method="GET">
+                <div class="input_group">
+                    <label for="titulo">Título:</label>
+                    <input class="input_form" name="titulo" id="input_titulo" type="text"
+                        placeholder="Ingrese un título" />
+                </div>
+                <div class="input_group">
+                    <label for="tipo">Tipo:</label>
+                    <select class="input_form" name="tipo" id="select_tipo">
+                        <option value="vacio">Vacío</option>
+                        <option value="comida">Comida</option>
+                        <option value="bebida">Bebida</option>
+                    </select>
+                </div>
+                <div class="input_group">
+                    <label for="orden">Orden:</label>
+                    <select class="input_form" id="orden" name="select_orden">
+                        <option value="none">Sin orden</option>
+                        <option value="asc">Ascendente</option>
+                        <option value="desc">Descendente</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn_submit">Filtrar</button>
+            </form>
+        </div>
+        <hr />
         <div id="productosContenedor">
             <div class="cartas">
                 <img
                     src="https://www.shutterstock.com/shutterstock/photos/2147550405/display_1500/stock-photo-grilled-picanha-with-farofa-and-vinaigrette-2147550405.jpg">
-                <div class="descripcionProducto">
+                <div class="descripcion_producto">
                     <h3>Churrasco</h3>
-                    <h6>Comida</h6>
+                    <h5>Comida</h5>
+                    <p class="producto_precio">Valor: <span>$ 1500</span></p>
                 </div>
-                <p>$ 1500</p>
-            </div>
-            <div class="cartas">
-                <img
-                    src="https://www.shutterstock.com/shutterstock/photos/2147550405/display_1500/stock-photo-grilled-picanha-with-farofa-and-vinaigrette-2147550405.jpg">
-                <div class="descripcionProducto">
-                    <h3>Churrasco</h3>
-                    <h6>Comida</h6>
-                </div>
-                <p>$ 1500</p>
-            </div>
-            <div class="cartas">
-                <img
-                    src="https://www.shutterstock.com/shutterstock/photos/2147550405/display_1500/stock-photo-grilled-picanha-with-farofa-and-vinaigrette-2147550405.jpg">
-                <div class="descripcionProducto">
-                    <h3>Churrasco</h3>
-                    <h6>Comida</h6>
-                </div>
-                <p>$ 1500</p>
+
             </div>
         </div>
     </section>
