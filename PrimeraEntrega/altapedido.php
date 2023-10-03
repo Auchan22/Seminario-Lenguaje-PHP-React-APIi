@@ -38,7 +38,7 @@
                     <option value="7">Vino</option>
                     <option value="8">Wisky</option>
                     <option value="9">Jugo de naranja</option>
-                    <option value="10">Coca cola</option>
+                    <option value="10">Coca ola</option>
                 </select>
             </div>
             <div class="input_group">

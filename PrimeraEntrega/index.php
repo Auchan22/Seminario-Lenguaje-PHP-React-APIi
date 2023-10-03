@@ -46,10 +46,9 @@ include("db/conexionDB.php");
         </div>
         <hr />
         <?php
-        include("Repository/PedidosRepository.php");
-        $pr = new PedidosRepository();
-
-        var_dump($pr->getPedidos());
+        include("Repository/ItemsRepository.php");
+        $Repository = new ItemsRepository();
+        var_dump($Repository->getItems());
         ?>
         <div id="productos_contenedor">
             <div class="cartas">
@@ -135,7 +134,7 @@ include("db/conexionDB.php");
 
         </div>
     </section>
-    <a href="./altapedido.html" id="agregar_pedido">Agregar Pedido</a>
+    <a href="./altapedido.php" id="agregar_pedido">Agregar Pedido</a>
     <footer class="footer">
         <p>Creado con ❤ por <b>David Potin</b> & <b>Agustin Surila Soto</b> | <b>A&ntilde;o 2023</b></p>
     </footer>

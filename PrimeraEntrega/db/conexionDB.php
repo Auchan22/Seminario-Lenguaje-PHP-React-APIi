@@ -13,4 +13,4 @@ if($conn->connect_error){
 // Nos permite setear por default el schema que queramos, para que en las querys no tener que hacer mydb.tabla
 mysqli_select_db($conn, "mydb");
 
-echo "🚀 Conexión establecida";
+// echo "🚀 Conexión establecida";
