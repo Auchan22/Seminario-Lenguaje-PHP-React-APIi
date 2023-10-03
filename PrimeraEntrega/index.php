@@ -1,3 +1,6 @@
+<?php
+    include("db/conexionDB.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,6 +47,12 @@
             </form>
         </div>
         <hr />
+        <?php
+            include("Repository/PedidosRepository.php");
+            $pr = new PedidosRepository();
+
+            var_dump($pr->getPedidos());
+        ?>
         <div id="productos_contenedor">
             <div class="cartas">
                 <img
