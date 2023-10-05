@@ -1,3 +1,8 @@
+<?php
+    include("Repository/ItemsRepository.php");
+    include("Repository/PedidosRepository.php")
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +25,7 @@
             <h2>Generar Pedido</h2>
         </div>
         <hr />
-        <form id="form_alta" method="POST" action="index.php">
+        <form id="form_alta" method="POST" action="altapedido.php">
             <div>
                 <p style="color:slategray">Los campos que poseen * son obligatorios</p>
                 <hr>
@@ -29,17 +34,21 @@
                 <label for="item">Itém del menú: <span>*</span></label>
                 <select class="input_form" name="item" id="item">
                     <option value="0">Vacío</option>
-                    <option value="1">Bondiola</option>
-                    <option value="2">Churrasco</option>
-                    <option value="3">Milanesa Napolitana</option>
-                    <option value="4">Asado</option>
-                    <option value="5">Matambre a la pizza</option>
-                    <option value="6">Heineken</option>
-                    <option value="7">Vino</option>
-                    <option value="8">Wisky</option>
-                    <option value="9">Jugo de naranja</option>
-                    <option value="10">Coca ola</option>
+                    <?php
+                        $ir = new ItemsRepository();
+                        $array_result = $ir->getItems(null);
+
+                        var_dump($array_result);
+
+                        if($array_result->num_rows > 0):
+                        foreach ($array_result as $i):
+                    ?>
+                    <option value="<?php echo $i["id"]; ?>"><?php echo $i["nombre"]; ?></option>
+                    <?php endforeach; else:?>
+                    <option>No hay productos disponibles</option>
+                    <?php endif; ?>
                 </select>
+
             </div>
             <div class="input_group">
                 <label for="nro_mesa">Nro. de Mesa: <span>*</span></label>
@@ -56,8 +65,18 @@
                 <label for="descripcion">Nota del pedido:</label>
                 <textarea class="input_form" cols="5" name="descripcion" id="descripcion"></textarea>
             </div>
-            <button type="button" id="btn_submit_pedido">+ Crear Pedido</button>
+            <button type="submit" id="btn_submit_pedido">+ Crear Pedido</button>
         </form>
+        <?php
+            $id_item = $_POST["item"];
+            $nro_mesa = $_POST["nro_mesa"];
+            $descripcion = $_POST["descripcion"];
+
+            if(strlen($id_item) > 0 && strlen($nro_mesa) > 0){
+                $pr = new PedidosRepository();
+                $result = $pr->createPedido(["id_item" => $id_item, "nro_mesa" => $nro_mesa, "descripcion" => $descripcion]);
+            }
+        ?>
     </section>
     <footer class="footer">
         <p>Creado con ❤ por <b>David Potin</b> & <b>Agustin Surila Soto</b> | <b>A&ntilde;o 2023</b></p>

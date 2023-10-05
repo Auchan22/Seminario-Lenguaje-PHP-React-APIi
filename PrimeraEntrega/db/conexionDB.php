@@ -6,7 +6,7 @@ const DATABASE_NAME = "mydb";
 
 $conn = new mysqli(HOST, USER_DB, null, DATABASE_NAME);
 
-if($conn->connect_error){
+if ($conn->connect_error) {
     die("❌ Conexión fallida: " . $conn->connect_error);
 }
 
