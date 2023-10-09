@@ -11,16 +11,11 @@
 </head>
 
 <body>
-    <header class="header">
-        <img src="restaurant-logo-design-template-b281aeadaa832c28badd72c1f6c5caad_screen.jpg">
-        <h3>Don Chincho</h3>
-    </header>
+    <?php include("components/header.php.php");?>
     <section id="listProductos">
 
     </section>
-    <footer class="footer">
-        <p>Creado con ❤ por <b>David Potin</b> & <b>Agustin Surila Soto</b> | <b>A&ntilde;o 2023</b></p>
-    </footer>
+    <?php include("components/footer.php");?>
     <script src="indexPedidos.js" type="text/javascript"></script>
 </body>
 
