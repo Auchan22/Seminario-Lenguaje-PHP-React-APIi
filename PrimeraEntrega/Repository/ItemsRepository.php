@@ -17,7 +17,16 @@ class ItemsRepository extends BaseRepository {
 
         $result = mysqli_query($this->link_conn, $query);
 
-        return $result; // fetchea el resultado y lo pone en un array
+        return $result;
+    }
+
+    public function getItemImageById(int $id){
+        $query = "SELECT i.foto, i.tipo_foto FROM items_menu i WHERE i.id = " . $id;
+
+        $result = mysqli_query($this->link_conn, $query);
+
+        mysqli_close($this->link_conn);
+        return mysqli_fetch_array($result);
     }
 
 }

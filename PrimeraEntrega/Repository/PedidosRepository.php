@@ -23,7 +23,7 @@ class PedidosRepository extends BaseRepository
         $nro_mesa = $params["nro_mesa"];
         $descripcion = $params["descripcion"];
 
-        $query = "INSERT INTO pedidos (idItemMenu, nromesa, descripcion) VALUES (". $id_item . ", ". $nro_mesa . ", ". $descripcion . ")";
+        $query = "INSERT INTO pedidos (idItemMenu, nromesa, comentarios) VALUES (". $id_item . ", ". $nro_mesa . ", ". $descripcion . ")";
 
         $result = mysqli_query($this->link_conn, $query);
 

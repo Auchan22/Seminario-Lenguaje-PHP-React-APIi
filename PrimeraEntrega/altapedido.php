@@ -1,6 +1,7 @@
 <?php
     include("Repository/ItemsRepository.php");
-    include("Repository/PedidosRepository.php")
+    include("Repository/PedidosRepository.php");
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -16,10 +17,7 @@
 </head>
 
 <body>
-    <header class="header">
-        <img src="restaurant-logo-design-template-b281aeadaa832c28badd72c1f6c5caad_screen.jpg">
-        <h3>Don Chincho</h3>
-    </header>
+    <?php include_once("components/header.php") ?>
     <section id="formularioPedido">
         <div id="encabezado_alta_pedido">
             <h2>Generar Pedido</h2>
@@ -68,19 +66,23 @@
             <button type="submit" id="btn_submit_pedido">+ Crear Pedido</button>
         </form>
         <?php
-            $id_item = $_POST["item"];
-            $nro_mesa = $_POST["nro_mesa"];
-            $descripcion = $_POST["descripcion"];
+            if(count($_POST) > 0){
+                $id_item = $_POST["item"];
+                $nro_mesa = $_POST["nro_mesa"];
+                $descripcion = strlen($_POST["descripcion"]) > 0 ? $_POST["descripcion"] : "null";
 
-            if(strlen($id_item) > 0 && strlen($nro_mesa) > 0){
-                $pr = new PedidosRepository();
-                $result = $pr->createPedido(["id_item" => $id_item, "nro_mesa" => $nro_mesa, "descripcion" => $descripcion]);
+                if(strlen($id_item) > 0 && strlen($nro_mesa) > 0){
+                    $pr = new PedidosRepository();
+                    $result = $pr->createPedido(["id_item" => $id_item, "nro_mesa" => $nro_mesa, "descripcion" => $descripcion]);
+                }
+
+                $_SESSION["pedido_msg"] = "Se creó el pedido de manera correcta";
+                header("Location: ./index.php");
             }
+
         ?>
     </section>
-    <footer class="footer">
-        <p>Creado con ❤ por <b>David Potin</b> & <b>Agustin Surila Soto</b> | <b>A&ntilde;o 2023</b></p>
-    </footer>
+    <?php include_once("components/footer.php") ?>
     <script src="index.js" type="text/javascript"></script>
 </body>
 

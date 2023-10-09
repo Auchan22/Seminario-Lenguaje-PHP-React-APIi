@@ -1,6 +1,7 @@
 <?php
 include("db/conexionDB.php");
 include("Repository/ItemsRepository.php");
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +45,7 @@ include("Repository/ItemsRepository.php");
         </div>
         <hr />
 
+
         <div id="productos_contenedor">
             <?php
             $ir = new ItemsRepository();
@@ -53,7 +55,7 @@ include("Repository/ItemsRepository.php");
             foreach($items_array as $item) :
             ?>
                 <div class="cartas">
-                    <img src="<?php echo $item["foto"]; ?>" alt="Imagen producto">
+                    <img src="viewImage.php?id_item=<?php echo $item["id"]; ?>" alt="Imagen producto">
                     <div class="descripcion_producto">
                         <h3><?php echo $item["nombre"] ?></h3>
                         <h5><?php echo $item["tipo"] ?></h5>
@@ -71,5 +73,19 @@ include("Repository/ItemsRepository.php");
     </section>
     <a href="./altapedido.php" id="agregar_pedido">Agregar Pedido</a>
     <?php include("components/footer.php") ?>
+<script>
+    <?php if(isset($_SESSION["pedido_msg"])):
+    ?>
+    let alerta = document.getElementById("alerta");
+    alerta.classList.remove("esconderAlerta");
+    alerta.classList.add("mostrarAlerta");
+
+    setTimeout(() => {
+        alerta.classList.remove("mostrarAlerta");
+        alerta.classList.add("esconderAlerta");
+        <?php session_unset(); ?>
+    }, 4000)
+    <?php endif; ?>
+</script>
 </body>
 </html>

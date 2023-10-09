@@ -27,7 +27,7 @@ btnSubmitPedido.addEventListener("click", (e) => {
         descripcion: inputDescripcion.value || "Ninguna"
     };
 
-    localStorage.setItem("pedidoInfo", JSON.stringify(pedidoInfo)); // convierto el pedidos info en una cadena 
+    localStorage.setItem("pedidoInfo", JSON.stringify(pedidoInfo)); // convierto el pedidos info en una cadena
     // window.location.href = "pedidosrealizados.html"; // redirijo al usuario a pedidos
 });
 
