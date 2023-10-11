@@ -71,6 +71,7 @@ session_start();
 
         </div>
     </section>
+    <a href="./pedidosrealizados.php" id="ver_pedido">Ver Pedidos</a>
     <a href="./altapedido.php" id="agregar_pedido">Agregar Pedido</a>
     <?php include("components/footer.php") ?>
 <script>

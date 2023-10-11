@@ -182,6 +182,17 @@ hr {
   color: #fff;
   transition: 150ms all ease-in;
 }
+#ver_pedido {
+  position: fixed;
+  bottom: 130px;
+  right: 40px;
+  background-color: #1f2941;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 15px;
+  color: #fff;
+  transition: 150ms all ease-in;
+}
 
 #agregar_pedido:hover {
   background-color: #246a73;
