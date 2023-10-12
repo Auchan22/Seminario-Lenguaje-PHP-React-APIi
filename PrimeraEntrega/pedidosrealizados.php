@@ -35,7 +35,7 @@ session_start();
                         <h3><?php echo $item["nombre"] ?></h3>
                         <h5><?php echo $item["tipo"] ?></h5>
                         <p style="font-weight: bold">Nro. Mesa: <span><?php echo $item["nromesa"] ?></span></p>
-                        <div>
+                        <div class="descripcion_pedido">
                             <h4>Descripción:</h4>
                             <p><?php echo strlen($item["comentarios"])>0 ? $item["comentarios"] : '<i>Sin descripci&oacute;n</i>' ?></p>
                         </div>
@@ -43,7 +43,7 @@ session_start();
                 </div>
             <?php  endforeach;
              else:{
-                    echo "No hay pedidos disponibles";
+                    echo "<p><b>No hay pedidos disponibles</b></p>";
                 }
                 endif;
             ?>
@@ -52,7 +52,6 @@ session_start();
     </section>
     <a href="./index.php" id="agregar_pedido">Volver al Menu</a> 
     <?php include("components/footer.php");?>
-    <script src="indexPedidos.js" type="text/javascript"></script>
     <script>
         <?php if(isset($_SESSION["pedido_msg"])):
         ?>
@@ -64,7 +63,7 @@ session_start();
             alerta.classList.remove("mostrarAlerta");
             alerta.classList.add("esconderAlerta");
             <?php session_destroy(); ?>
-        }, 4000)
+        }, 3000)
         <?php endif; ?>
     </script>
 </body>

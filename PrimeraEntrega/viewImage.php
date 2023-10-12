@@ -4,7 +4,7 @@
     $ir = new ItemsRepository();
     $res = $ir->getItemImageById($_GET["id_item"]);
 
-    header("Content-type: ". $res["tipo_foto"]);
+    header("Content-type: jpg");
 
     echo $res["foto"];
 

@@ -39,7 +39,7 @@ include("Repository/ItemsRepository.php");
                         <option value="DESC">Descendente</option>
                     </select>
                 </div>
-                <button type="submit" class="btn_submit" id="filter_btn" disabled>Filtrar</button>
+                <button type="submit" class="btn_submit" id="filter_btn">Filtrar</button>
             </form>
         </div>
         <hr />
@@ -63,7 +63,7 @@ include("Repository/ItemsRepository.php");
                 </div>
             <?php  endforeach;
                 else:{
-                    echo "No hay productos disponibles";
+                    echo "<p><b>No hay productos disponibles</b></p>";
                 }
                 endif;
             ?>
@@ -74,6 +74,5 @@ include("Repository/ItemsRepository.php");
     <a href="./altapedido.php" id="agregar_pedido">Agregar Pedido</a>
     <?php include("components/footer.php") ?>
 
-<script type="text/javascript" src="./handleForm.js"></script>
 </body>
 </html>

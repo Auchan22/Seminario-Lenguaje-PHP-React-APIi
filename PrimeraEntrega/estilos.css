@@ -304,6 +304,9 @@ hr {
   margin: 10px auto;
 }
 
+.descripcion_pedido p, .descripcion_pedido h4 {
+  margin: 0px;
+}
 /* -- Fin Lista Pedidos -- */
 
 /* -- Media Queries -- */

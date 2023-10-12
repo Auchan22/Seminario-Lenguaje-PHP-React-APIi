@@ -67,7 +67,7 @@
             if(count($_POST) > 0){
                 $id_item = $_POST["item"];
                 $nro_mesa = $_POST["nro_mesa"];
-                $descripcion = strlen($_POST["descripcion"]) > 0 ? $_POST["descripcion"] : "null";
+                $descripcion = $_POST["descripcion"];
 
                 if(strlen($id_item) > 0 && strlen($nro_mesa) > 0){
                     $pr = new PedidosRepository();

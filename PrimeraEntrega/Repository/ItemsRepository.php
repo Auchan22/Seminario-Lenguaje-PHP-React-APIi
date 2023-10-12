@@ -10,8 +10,20 @@ class ItemsRepository extends BaseRepository {
             $tipo = (string)$params["tipo"];
             $orden = $params["orden"];
 
-            if(strlen($titulo) != 0 || $tipo != "vacio" || $orden != "none" ){
-                $query .= " WHERE i.nombre LIKE '%".$titulo."%' AND i.tipo = '". $tipo . "' ORDER BY i.precio ". $orden;
+            if($titulo != ""){
+                $query .= " WHERE LOWER(i.nombre) LIKE '%".strtolower($titulo) ."%'";
+            }
+
+            if($titulo != "" && $tipo != ""){
+                $query .= " OR i.tipo = '".$tipo."%'";
+            }
+
+            if($titulo == "" && $tipo != ""){
+                $query .= " WHERE i.tipo = '".$tipo."'";
+            }
+
+            if($orden != "" ){
+                $query .= " ORDER BY i.precio ". $orden;
             }
         }
 
@@ -21,7 +33,7 @@ class ItemsRepository extends BaseRepository {
     }
 
     public function getItemImageById(int $id){
-        $query = "SELECT i.foto, i.tipo_foto FROM items_menu i WHERE i.id = " . $id;
+        $query = "SELECT i.foto FROM items_menu i WHERE i.id = " . $id;
 
         $result = mysqli_query($this->link_conn, $query);
 

@@ -20,15 +20,6 @@ btnSubmitPedido.addEventListener("click", (e) => {
             return;
         }
     }
-
-  let pedidoInfo = {                      // guardo la info seleccionada para pasarla a pedidos
-        item: selectItem.options[selectItem.selectedIndex].text,
-        mesa: selectMesa.options[selectMesa.selectedIndex].text,
-        descripcion: inputDescripcion.value || "Ninguna"
-    };
-
-    localStorage.setItem("pedidoInfo", JSON.stringify(pedidoInfo)); // convierto el pedidos info en una cadena
-     window.location.href = "pedidosrealizados.html"; // redirijo al usuario a pedidos
 });
 
 // form.addEventListener("submit", () => {
