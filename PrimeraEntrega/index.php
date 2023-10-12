@@ -1,6 +1,7 @@
 <?php
 include("db/conexionDB.php");
 include("Repository/ItemsRepository.php");
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,6 +74,19 @@ include("Repository/ItemsRepository.php");
     <a href="./pedidosrealizados.php" id="ver_pedido">Ver Pedidos</a>
     <a href="./altapedido.php" id="agregar_pedido">Agregar Pedido</a>
     <?php include("components/footer.php") ?>
+    <script>
+        <?php if(isset($_SESSION["pedido_msg"])):
+        ?>
+        let alerta = document.getElementById("alerta");
+        alerta.classList.remove("esconderAlerta");
+        alerta.classList.add("mostrarAlerta");
 
+        setTimeout(() => {
+            alerta.classList.remove("mostrarAlerta");
+            alerta.classList.add("esconderAlerta");
+            <?php session_destroy(); ?>
+        }, 3000)
+        <?php endif; ?>
+    </script>
 </body>
-</html>
+</html>  

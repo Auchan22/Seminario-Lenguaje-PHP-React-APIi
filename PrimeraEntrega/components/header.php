@@ -5,7 +5,7 @@
         <h3>Don Chincho</h3>
         </a>
     </div>
-    <?php if(isset($_SESSION["pedido_msg"])):
+    <?php if(isset($_SESSION["pedido_msg"])): // si el mensaje no es nulo entro
         ?>
         <p id="alerta" class="mostrarAlerta"><?php echo $_SESSION["pedido_msg"]; ?></p>
     <?php endif; ?>

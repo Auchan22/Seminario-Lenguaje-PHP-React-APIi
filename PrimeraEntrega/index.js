@@ -20,10 +20,7 @@ btnSubmitPedido.addEventListener("click", (e) => {
             return;
         }
     }
+
 });
 
-// form.addEventListener("submit", () => {
-//     selectItem.value = "0";
-//     selectMesa.selectedIndex = "0";
-//     inputDescripcion.value = "";
-// });
+
