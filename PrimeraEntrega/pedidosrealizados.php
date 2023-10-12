@@ -1,7 +1,6 @@
 <?php 
 include("db/conexionDB.php");
 include("Repository/PedidosRepository.php");
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,19 +51,5 @@ session_start();
     </section>
     <a href="./index.php" id="agregar_pedido">Volver al Menu</a> 
     <?php include("components/footer.php");?>
-    <script>
-        <?php if(isset($_SESSION["pedido_msg"])):
-        ?>
-        let alerta = document.getElementById("alerta");
-        alerta.classList.remove("esconderAlerta");
-        alerta.classList.add("mostrarAlerta");
-
-        setTimeout(() => {
-            alerta.classList.remove("mostrarAlerta");
-            alerta.classList.add("esconderAlerta");
-            <?php session_destroy(); ?>
-        }, 3000)
-        <?php endif; ?>
-    </script>
 </body>
 </html>

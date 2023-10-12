@@ -76,7 +76,6 @@
 
                 $_SESSION["pedido_msg"] = "Se creó el pedido de manera correcta";
                 header("Location: ./index.php");
-                echo("Se realizo el pedido");
             }
 
         ?>
