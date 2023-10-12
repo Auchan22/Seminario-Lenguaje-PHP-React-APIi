@@ -36,8 +36,6 @@
                         $ir = new ItemsRepository();
                         $array_result = $ir->getItems(null);
 
-                        var_dump($array_result);
-
                         if($array_result->num_rows > 0):
                         foreach ($array_result as $i):
                     ?>
