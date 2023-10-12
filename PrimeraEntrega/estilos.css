@@ -182,9 +182,17 @@ hr {
   color: #fff;
   transition: 150ms all ease-in;
 }
+#agregar_pedido:hover {
+  background-color: #246a73;
+  transition: 150ms all ease-in;
+  box-shadow: 0px 0px 85px 8px rgba(0, 0, 0, 0.4);
+}
+/* -- fin  Boton Agregar Pedido -- */
+
+/* -- Boton ver pedidos--*/
 #ver_pedido {
   position: fixed;
-  bottom: 130px;
+  bottom: 140px;
   right: 40px;
   background-color: #1f2941;
   text-decoration: none;
@@ -193,14 +201,15 @@ hr {
   color: #fff;
   transition: 150ms all ease-in;
 }
-
-#agregar_pedido:hover {
+#ver_pedido:hover {
   background-color: #246a73;
   transition: 150ms all ease-in;
   box-shadow: 0px 0px 85px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* -- Boton Agregar Pedido -- */
+/*-- fin de boton pedidos --*/
+
+
 
 /* -- Inicio Formulario Pedido -- */
 

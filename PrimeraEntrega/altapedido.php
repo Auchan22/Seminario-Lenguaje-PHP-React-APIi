@@ -82,6 +82,7 @@
 
         ?>
     </section>
+    <a href="./index.php" id="agregar_pedido">Volver al Menú</a>
     <?php include_once("components/footer.php") ?>
     <script src="index.js" type="text/javascript"></script>
 </body>

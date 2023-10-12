@@ -32,7 +32,7 @@ include("Repository/PedidosRepository.php");
                     </div>
                 </div>
             <?php  endforeach;
-             else{
+             else:{
                     echo "No hay pedidos disponibles";
                 }
                 endif;
