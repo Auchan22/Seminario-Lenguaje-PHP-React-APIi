@@ -1,7 +1,6 @@
 <?php
 include("db/conexionDB.php");
 include("Repository/ItemsRepository.php");
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +16,7 @@ session_start();
 <body>
     <?php include("components/header.php")?>
     <section id="listProductos">
-        <div id="encabezado_lista">
+        <div class="encabezado_lista">
             <h2>Menú</h2>
             <form method="GET" action="index.php">
                 <div class="input_group">
@@ -27,7 +26,7 @@ session_start();
                 <div class="input_group">
                     <label for="tipo">Tipo:</label>
                     <select class="input_form" name="tipo" id="tipo">
-                        <option value="vacio">Vacío</option>
+                        <option value="">Vacío</option>
                         <option value="COMIDA">Comida</option>
                         <option value="BEBIDA">Bebida</option>
                     </select>
@@ -35,12 +34,12 @@ session_start();
                 <div class="input_group">
                     <label for="orden">Orden:</label>
                     <select class="input_form" id="orden" name="orden">
-                        <option value="none">Sin orden</option>
+                        <option value="">Sin orden</option>
                         <option value="ASC">Ascendente</option>
                         <option value="DESC">Descendente</option>
                     </select>
                 </div>
-                <button type="submit" class="btn_submit">Filtrar</button>
+                <button type="submit" class="btn_submit" id="filter_btn" disabled>Filtrar</button>
             </form>
         </div>
         <hr />
@@ -74,19 +73,7 @@ session_start();
     <a href="./pedidosrealizados.php" id="ver_pedido">Ver Pedidos</a>
     <a href="./altapedido.php" id="agregar_pedido">Agregar Pedido</a>
     <?php include("components/footer.php") ?>
-<script>
-    <?php if(isset($_SESSION["pedido_msg"])):
-    ?>
-    let alerta = document.getElementById("alerta");
-    alerta.classList.remove("esconderAlerta");
-    alerta.classList.add("mostrarAlerta");
 
-    setTimeout(() => {
-        alerta.classList.remove("mostrarAlerta");
-        alerta.classList.add("esconderAlerta");
-        <?php session_unset(); ?>
-    }, 4000)
-    <?php endif; ?>
-</script>
+<script type="text/javascript" src="./handleForm.js"></script>
 </body>
 </html>
