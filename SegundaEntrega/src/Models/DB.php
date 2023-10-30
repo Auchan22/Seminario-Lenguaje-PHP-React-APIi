@@ -1,16 +1,15 @@
 <?php
-namespace App\Models;
-const HOST = "localhost";
+
+const HOST = "mysql:host=localhost;dbname=mydb";
 const USER_DB = "root";
 const DATABASE_NAME = "mydb";
 
-$conn = new mysqli(HOST, USER_DB, null, DATABASE_NAME);
+$conn = new PDO(HOST, USER_DB, null);
 
-if ($conn->connect_error) {
-    throw new Exception($conn->connect_error, $conn->connect_errno);
+if ($conn->errorCode()) {
+    throw new Exception($conn->errorInfo(), $conn->errorCode());
 }
 
 // Nos permite setear por default el schema que queramos, para que en las querys no tener que hacer mydb.tabla
-mysqli_select_db($conn, "mydb");
 
 //echo "🚀 Conexión establecida";
