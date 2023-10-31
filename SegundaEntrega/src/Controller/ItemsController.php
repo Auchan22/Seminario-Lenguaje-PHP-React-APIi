@@ -1,12 +1,13 @@
 <?php
 namespace App\Controller;
 use App\Repository\ItemsRepository;
+use App\Validator\ItemsValidator;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\utils\Response as ResponseStatus;
-
 class ItemsController
 {
+    use ItemsValidator;
     public function index(Request $request, Response $response): Response
     {
         $params = $request->getQueryParams();
@@ -17,6 +18,70 @@ class ItemsController
         return $response
             ->withHeader("Content-Type", "application/json")
             ->withStatus($res[1]);
+    }
+
+    //En Insomnia, el tipo de body tiene que ser multipart.
+    //Ademas, se utiliza getParsedBody y no getBody porque parsed se utiliza para acceder a datos codificados
+    public function create(Request $request, Response $response, $args): Response
+    {
+        $file = $request->getUploadedFiles();
+        $body = $request->getParsedBody();
+
+        if(count($body) < 3 || count($file) == 0){
+            $response
+                ->getBody()->write(json_encode(["msg" => "Se deben enviar todos los campos: nombre, precio, tipo y foto"]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+        }
+
+        if(!$this->validateNombre($body["nombre"])){
+            $response
+                ->getBody()->write(json_encode(["msg" => "El campo nombre no puede estar vacio y no debe contener numeros"]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+        }
+
+            if( !$this->validatePrecio((int)$body["precio"])){
+                $response
+                    ->getBody()->write(json_encode(["msg" => "El campo precio no puede estar vacio y debe contener numeros"]));
+                return $response
+                    ->withHeader("Content-Type", "application/json")
+                    ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+            }
+
+                if(!$this->validateTipo($body["tipo"])){
+                    $response
+                        ->getBody()->write(json_encode(["msg" => "El campo tipo no puede estar vacio y debe ser: BEBIDA o COMIDA"]));
+                    return $response
+                        ->withHeader("Content-Type", "application/json")
+                        ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+                }
+
+        // Por medio de explode, podemos dividir un string en un array al encontrar el caracter separador
+        // Como el getClientMediaType() devuelve "image/tipo", y a nosotros unicamente nos interesa el tipo (segunda pos del array), lo capturamos
+        // Esto se basa en la interfaz UploadedFileInterface
+        $tipo_imagen = explode("/", $file["imagen"]->getClientMediaType())[1];
+        $imagen = $file["imagen"]->getClientFilename();
+
+        $ir = new ItemsRepository();
+        $body = array_merge($body, ["imagen" => $imagen, "tipo_imagen" => $tipo_imagen]);
+        $res = $ir->createItem($body);
+
+        if($res != "ok"){
+            $response
+                ->getBody()->write(json_encode(["msg" => "No se pudo crear el registro", $res]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+        }
+
+        $response
+            ->getBody()->write(json_encode(["msg" => "Se creo el item"]));
+        return $response
+            ->withHeader("Content-Type", "application/json")
+            ->withStatus(ResponseStatus::HTTP_CREATED);
     }
 
     public function update(Request $request, Response $response, $args): Response
