@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 use App\Repository\ItemsRepository;
+use App\Repository\PedidosRepository;
 use App\Validator\ItemsValidator;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -86,7 +87,52 @@ class ItemsController
 
     public function update(Request $request, Response $response, $args): Response
     {
-        var_dump($args);
+        $body = $request->getParsedBody();
+
+        var_dump($body);
+
         return $response;
+    }
+
+    public function delete(Request $request, Response $response, $args): Response
+    {
+        $id = $args["id"];
+
+        $ir = new ItemsRepository();
+        $existPedido = $ir->getItemById($id);
+
+        if(count($existPedido) == 0){
+            $response
+                ->getBody()->write(json_encode(["msg" => "El item con id: ".$id." no se puede eliminar porque no existe"]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_NOT_FOUND);
+        }
+
+        $hasPedidos = $ir->hasPedidos($id)["CUENTA"] > 0;
+
+        if($hasPedidos){
+            $response
+                ->getBody()->write(json_encode(["msg" => "No se puede eliminar el item porque tiene pedidos asociados"]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+        }
+
+        $res = $ir->deleteItem($id);
+
+        if($res != "ok"){
+            $response
+                ->getBody()->write(json_encode(["msg" => "Hubo un error", $res]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+        }
+
+        $response
+            ->getBody()->write(json_encode(["msg" => "Se elimino el registro con id: ".$id]));
+        return $response
+            ->withHeader("Content-Type", "application/json")
+            ->withStatus(ResponseStatus::HTTP_NO_CONTENT);
     }
 }

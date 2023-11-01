@@ -8,6 +8,6 @@ class ItemsRoutes {
         $group->get("", "App\\Controller\\ItemsController:index");
         $group->post("", "App\\Controller\\ItemsController:create");
         $group->put("/{id}", "App\\Controller\\ItemsController:update");
-//        $group->put("/{id}", "App\\Controller\\ItemsController:delete");
+        $group->delete("/{id}", "App\\Controller\\ItemsController:delete");
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repository;
-use App\Repository\BaseRepository;
 use PDO;
 class ItemsRepository extends BaseRepository {
     public function getItems(?array $params){
@@ -51,6 +50,54 @@ class ItemsRepository extends BaseRepository {
             $stmt->bindParam(":tipo", $tipo, PDO::PARAM_STR);
             $stmt->bindParam(":imagen", $imagen, PDO::PARAM_STR);
             $stmt->bindParam(":tipoImagen", $tipoImagen, PDO::PARAM_STR);
+            $stmt->execute();
+
+            return "ok";
+        }catch (\PDOException $e){
+            return $e;
+        }
+    }
+
+    public function getItemById($id){
+        $query = "SELECT * from items_menu i WHERE i.id = :id";
+
+        try {
+            $stmt = $this->link_conn->prepare($query);
+
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }catch (\PDOException $e) {
+            return $e;
+        }
+    }
+    public function hasPedidos($id)
+    {
+        $query = "SELECT COUNT(p.id) as CUENTA FROM pedidos p WHERE p.idItemMenu = :id";
+
+        try {
+            $stmt = $this->link_conn->prepare($query);
+
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+        }catch (\PDOException $e){
+            return $e;
+        }
+    }
+
+
+    public function deleteItem($id)
+    {
+        $query = "DELETE FROM items_menu i WHERE i.id = :id";
+
+        try {
+            $stmt = $this->link_conn->prepare($query);
+
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            var_dump($stmt->queryString);
             $stmt->execute();
 
             return "ok";

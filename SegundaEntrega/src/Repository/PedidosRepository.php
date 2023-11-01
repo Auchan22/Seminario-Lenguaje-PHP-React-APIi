@@ -1,6 +1,6 @@
 <?php
-include_once("BaseRepository.php");
-
+namespace App\Repository;
+use PDO;
 class PedidosRepository extends BaseRepository
 {
     public function getPedidos()
