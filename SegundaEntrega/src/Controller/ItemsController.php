@@ -1,12 +1,12 @@
 <?php
 namespace App\Controller;
+use App\Interfaces\CRUDInterface;
 use App\Repository\ItemsRepository;
-use App\Repository\PedidosRepository;
 use App\Validator\ItemsValidator;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\utils\Response as ResponseStatus;
-class ItemsController
+class ItemsController implements CRUDInterface
 {
     use ItemsValidator;
     public function index(Request $request, Response $response): Response
