@@ -116,7 +116,7 @@ class ItemsController implements CRUDInterface
                 ->getBody()->write(json_encode(["msg" => "No se puede eliminar el item porque tiene pedidos asociados"]));
             return $response
                 ->withHeader("Content-Type", "application/json")
-                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+                ->withStatus(ResponseStatus::HTTP_CONFLICT);
         }
 
         $res = $ir->deleteItem($id);
