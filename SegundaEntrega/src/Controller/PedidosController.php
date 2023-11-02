@@ -56,5 +56,22 @@ class PedidosController
     public function findById(Request $request, Response $response, $args): Response
     {
         $id = $args["id"];
+
+        $pr = new PedidosRepository();
+        $res = $pr->getPedidoById($id);
+
+        if(count($res) == 0){
+            $response
+                ->getBody()->write(json_encode(["msg" => "No se encontro ningún pedido con el id: {$id}"]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_NOT_FOUND);
+        }
+
+        $response
+            ->getBody()->write(json_encode([$res[0]]));
+        return $response
+            ->withHeader("Content-Type", "application/json")
+            ->withStatus(ResponseStatus::HTTP_OK);
     }
 }

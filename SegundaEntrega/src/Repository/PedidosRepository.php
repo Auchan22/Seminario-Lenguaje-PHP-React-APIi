@@ -17,6 +17,21 @@ class PedidosRepository extends BaseRepository
         }
     }
 
+    public function getPedidoById($id){
+        $query = "SELECT p.id, p.idItemMenu, p.nroMesa, p.comentarios, p.fechaAlta, i.nombre, i.precio, i.tipo_imagen, i.imagen, i.tipo FROM pedidos p INNER JOIN items_menu i on p.idItemMenu = i.id WHERE p.id = :id";
+
+        try {
+            $stmt = $this->link_conn->prepare($query);
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\PDOException $e){
+            return $e;
+        }
+    }
+
     public function deletePedido($id){
         $query = "DELETE FROM pedidos p WHERE p.id = :id";
 
