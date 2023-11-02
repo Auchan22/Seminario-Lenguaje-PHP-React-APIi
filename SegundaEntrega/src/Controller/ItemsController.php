@@ -21,9 +21,11 @@ class ItemsController implements CRUDInterface
             ->withStatus($res[1]);
     }
 
+    //TODO: falta validar que no exista un item con el mismo nombre
+
     //En Insomnia, el tipo de body tiene que ser multipart.
     //Ademas, se utiliza getParsedBody y no getBody porque parsed se utiliza para acceder a datos codificados
-    public function create(Request $request, Response $response, $args): Response
+    public function create(Request $request, Response $response): Response
     {
         $file = $request->getUploadedFiles();
         $body = $request->getParsedBody();
@@ -85,7 +87,7 @@ class ItemsController implements CRUDInterface
             ->withStatus(ResponseStatus::HTTP_CREATED);
     }
 
-    public function update(Request $request, Response $response, $args): Response
+    public function update(Request $request, Response $response,?array $args): Response
     {
         $body = $request->getParsedBody();
 
