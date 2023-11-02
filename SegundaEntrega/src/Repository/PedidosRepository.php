@@ -6,10 +6,30 @@ class PedidosRepository extends BaseRepository
     public function getPedidos()
     {
         $query = "SELECT * FROM pedidos p INNER JOIN items_menu i on p.idItemMenu = i.id ORDER BY p.fechaAlta DESC";
-        $result = mysqli_query($this->link_conn, $query);
 
-        //Convierte la respuesta en un array
-        return $result;
+        try{
+            $stmt = $this->link_conn->prepare($query);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }catch (\PDOException $e){
+            return $e;
+        }
+    }
+
+    public function deletePedido($id){
+        $query = "DELETE FROM pedidos p WHERE p.id = :id";
+
+        try {
+            $stmt = $this->link_conn->prepare($query);
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return "ok";
+        } catch (\PDOException $e){
+            return $e;
+        }
     }
 
 

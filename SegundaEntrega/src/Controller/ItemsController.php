@@ -126,7 +126,7 @@ class ItemsController implements CRUDInterface
                 ->getBody()->write(json_encode(["msg" => "Hubo un error", $res]));
             return $response
                 ->withHeader("Content-Type", "application/json")
-                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+                ->withStatus(ResponseStatus::HTTP_SERVER_ERROR);
         }
 
         $response
