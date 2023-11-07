@@ -88,6 +88,40 @@ class ItemsRepository extends BaseRepository {
         }
     }
 
+    public function updateItem($id, $body)
+    {
+        $query = "UPDATE items_menu i SET";
+        if (isset($body['nombre'])) {
+            $query .= " nombre = '" . $body['nombre'] . "',";
+        }
+
+        if (isset($body['precio'])) {
+            $query .= " precio = '" . $body['precio'] . "',";
+        }
+
+        if (isset($body['tipo'])) {
+            $query .= " tipo = '" . $body['tipo'] . "',";
+        }
+
+        if (isset($body['imagen'])) {
+            $query .= " imagen = '" . $body['imagen'] . "',";
+        }
+
+        // Elimina la coma adicional al final de la consulta
+        $query = rtrim($query, ",");
+
+        // Agrega la condición WHERE para actualizar la fila con el ID especificado
+        $query .= " WHERE id = " . $id;
+
+        try {
+            $stmt = $this->link_conn->prepare($query);
+            $stmt->execute();
+
+            return "ok";
+        }catch (\Exception $e){
+            return $e;
+        }
+    }
 
     public function deleteItem($id)
     {
@@ -97,11 +131,25 @@ class ItemsRepository extends BaseRepository {
             $stmt = $this->link_conn->prepare($query);
 
             $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-            var_dump($stmt->queryString);
             $stmt->execute();
 
             return "ok";
         }catch (\PDOException $e){
+            return $e;
+        }
+    }
+
+    public function existItemById($id){
+        $query = "SELECT COUNT(i.id) AS cuenta FROM items_menu i WHERE i.id = :id";
+
+        try {
+            $stmt = $this->link_conn->prepare($query);
+
+            $stmt->bindParam(":id",$id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return (int)$stmt->fetchAll(PDO::FETCH_ASSOC)[0]["cuenta"];
+        }catch (\Exception $e){
             return $e;
         }
     }

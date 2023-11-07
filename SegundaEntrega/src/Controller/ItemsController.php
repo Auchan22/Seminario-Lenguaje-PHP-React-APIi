@@ -21,7 +21,6 @@ class ItemsController implements CRUDInterface
             ->withStatus($res[1]);
     }
 
-    //TODO: falta validar que no exista un item con el mismo nombre
 
     //En Insomnia, el tipo de body tiene que ser multipart.
     //Ademas, se utiliza getParsedBody y no getBody porque parsed se utiliza para acceder a datos codificados
@@ -89,11 +88,66 @@ class ItemsController implements CRUDInterface
 
     public function update(Request $request, Response $response,?array $args): Response
     {
-        $body = $request->getParsedBody();
+        $body = (array)json_decode($request->getBody()->getContents());
+        $id = $args["id"];
 
-        var_dump($body);
+        if(count($body) == 0){
+            $response
+                ->getBody()->write(json_encode(["msg" => "Se debe enviar al menos un campo"]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+        }
 
-        return $response;
+        if(isset($body["nombre"]) && !$this->validateNombre($body["nombre"])){
+            $response
+                ->getBody()->write(json_encode(["msg" => "El campo nombre no puede estar vacio y no debe contener numeros"]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+        }
+
+        if(isset($body["precio"]) && !$this->validatePrecio((int)$body["precio"])){
+            $response
+                ->getBody()->write(json_encode(["msg" => "El campo precio no puede estar vacio y debe contener numeros"]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+        }
+
+        if(isset($body["tipo"]) && !$this->validateTipo($body["tipo"])){
+            $response
+                ->getBody()->write(json_encode(["msg" => "El campo tipo no puede estar vacio y debe ser: BEBIDA o COMIDA"]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+        }
+
+        $ir = new ItemsRepository();
+        $existItem = $ir->existItemById($id) > 0;
+
+        if(!$existItem){
+            $response
+                ->getBody()->write(json_encode(["msg" => "No se puede actualizar el item con el id $id porque no esta creado"]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_NOT_FOUND);
+        }
+        $res = $ir->updateItem($id, $body);
+
+        if($res != "ok"){
+            $response
+                ->getBody()->write(json_encode(["msg" => "Hubo un error", $res]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+        }
+
+        $response
+            ->getBody()->write(json_encode(["msg" => "Se actualizó el item"]));
+        return $response
+            ->withHeader("Content-Type", "application/json")
+            ->withStatus(ResponseStatus::HTTP_OK);
     }
 
     public function delete(Request $request, Response $response, $args): Response
