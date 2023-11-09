@@ -8,7 +8,7 @@ trait ItemsValidator {
     }
 
     public function validateTipo(string $tipo): bool{
-        return !preg_match('/[^0-9]/', $tipo) && strlen($tipo) > 0 && $tipo == "COMIDA" || $tipo == "BEBIDA";
+        return preg_match('/[^0-9]/', $tipo) && strlen($tipo) > 0 && ($tipo == "COMIDA" || $tipo == "BEBIDA");
     }
 
     public function validatePrecio(int $precio): bool{

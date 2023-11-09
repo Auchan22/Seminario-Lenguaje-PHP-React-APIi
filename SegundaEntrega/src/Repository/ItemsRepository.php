@@ -139,18 +139,4 @@ class ItemsRepository extends BaseRepository {
         }
     }
 
-    public function existItemById($id){
-        $query = "SELECT COUNT(i.id) AS cuenta FROM items_menu i WHERE i.id = :id";
-
-        try {
-            $stmt = $this->link_conn->prepare($query);
-
-            $stmt->bindParam(":id",$id, PDO::PARAM_INT);
-            $stmt->execute();
-
-            return (int)$stmt->fetchAll(PDO::FETCH_ASSOC)[0]["cuenta"];
-        }catch (\Exception $e){
-            return $e;
-        }
-    }
 }

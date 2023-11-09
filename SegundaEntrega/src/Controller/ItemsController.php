@@ -1,12 +1,14 @@
 <?php
 namespace App\Controller;
-use App\Interfaces\CRUDInterface;
+use App\Interfaces\BasicCrudActionsInterface;
+use App\Interfaces\DeleteCrudActionInterface;
+use App\Interfaces\UpdateCrudActionInterface;
 use App\Repository\ItemsRepository;
 use App\Validator\ItemsValidator;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\utils\Response as ResponseStatus;
-class ItemsController implements CRUDInterface
+class ItemsController implements BasicCrudActionsInterface, DeleteCrudActionInterface, UpdateCrudActionInterface
 {
     use ItemsValidator;
     public function index(Request $request, Response $response): Response
@@ -124,9 +126,9 @@ class ItemsController implements CRUDInterface
         }
 
         $ir = new ItemsRepository();
-        $existItem = $ir->existItemById($id) > 0;
+        $existItem = $ir->getItemById($id);
 
-        if(!$existItem){
+        if(count($existItem) == 0){
             $response
                 ->getBody()->write(json_encode(["msg" => "No se puede actualizar el item con el id $id porque no esta creado"]));
             return $response
