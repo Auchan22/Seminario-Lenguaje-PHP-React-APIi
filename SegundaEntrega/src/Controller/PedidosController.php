@@ -79,6 +79,15 @@ class PedidosController implements BasicCrudActionsInterface, DeleteCrudActionIn
         $id = $args["id"];
 
         $pr = new PedidosRepository();
+        $existPedido = $pr->getPedidoById($id);
+
+        if(count($existPedido) == 0){
+            $response
+                ->getBody()->write(json_encode(["msg" => "No se encontro ningún pedido con el id: {$id}"]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_NOT_FOUND);
+        }
         $res = $pr->deletePedido($id);
 
         if($res != "ok"){

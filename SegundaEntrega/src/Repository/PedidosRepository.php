@@ -48,10 +48,6 @@ class PedidosRepository extends BaseRepository
     }
 
 
-    /**
-     * @param array $params
-     * @return bool|mysqli_result
-     */
     public function createPedido(array $params)
     {
         $id_item = $params["id_item"];
@@ -72,7 +68,5 @@ class PedidosRepository extends BaseRepository
         }catch (\Exception $e){
             return $e;
         }
-        $result = mysqli_query($this->link_conn, $query);
-        return $result;
     }
 }
