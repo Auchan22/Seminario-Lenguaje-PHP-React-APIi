@@ -68,6 +68,8 @@ class ItemsController implements BasicCrudActionsInterface, DeleteCrudActionInte
         // Esto se basa en la interfaz UploadedFileInterface
         $tipo_imagen = explode("/", $file["imagen"]->getClientMediaType())[1];
         $imagen = $file["imagen"]->getClientFilename();
+        //TODO
+        //Recibir un base64 de la imagen
 
         $ir = new ItemsRepository();
         $body = array_merge($body, ["imagen" => $imagen, "tipo_imagen" => $tipo_imagen]);
