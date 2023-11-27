@@ -9,6 +9,13 @@ body {
   background-color: #f3dfc1;
 }
 
+#content {
+  margin-top: 90px;
+  padding-top: 10px;
+  margin-bottom: 60px;
+  padding-bottom: 10px;
+}
+
 /* -- Inicio Header -- */
 
 .header img {
@@ -202,7 +209,7 @@ hr {
 
 /* -- Boton Agregar Pedido -- */
 
-#agregar_pedido {
+.floating {
   position: fixed;
   bottom: 90px;
   right: 30px;
@@ -214,10 +221,11 @@ hr {
   transition: 150ms all ease-in;
 }
 
-#agregar_pedido:hover {
+.floating:hover {
   background-color: #246a73;
   transition: 150ms all ease-in;
   box-shadow: 0px 0px 85px 8px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }
 
 /* -- fin  Boton Agregar Pedido -- */
@@ -382,3 +390,39 @@ hr {
     background: green;
   }
 }
+
+.btn {
+  width: 80px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  font-family: Inter;
+  font-weight: bold;
+}
+
+.btn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.250ms all ease-in;
+}
+
+/* -- Inicio CardItems -- */
+
+.btn-actions {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.btn_editar {
+  background-color: #6eccd8;
+}
+
+.btn_eliminar {
+  background-color: #da1010;
+}
+
+/* -- Fin CardItems -- */
