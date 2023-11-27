@@ -1,13 +1,384 @@
+/* Fuente */
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  background-color: #f3dfc1;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* -- Inicio Header -- */
+
+.header img {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}
+
+.header div a {
+  display: flex;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.header {
+  background-color: #012326;
+  position: fixed;
+  width: 100vw;
+  height: 60px;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  gap: 10px;
+  color: #fff;
+}
+
+/* -- Fin Header -- */
+
+/* -- Inicio Navbar --*/
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-right: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.navbar a:hover {
+  font-weight: bold;
+}
+
+.is-active {
+  text-decoration: underline !important;
+  opacity: 0.7;
+}
+
+/* -- Fin Navbar -- */
+
+/* -- Inicio Footer -- */
+
+.footer {
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: #024059;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -- Fin Footer -- */
+
+/* -- Inicio seccion Lista -- */
+#listProductos {
+  margin-top: 60px;
+  padding-top: 10px;
+  margin-bottom: 60px;
+  padding-bottom: 10px;
+}
+
+.encabezado_lista {
+  margin: 0px 8vw 30px 8vw;
+  padding-top: 15px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.encabezado_lista h2 {
+  font-weight: bold;
+}
+
+.encabezado_lista form {
+  background-color: #95b7a6;
+  border: 1px solid #ece4db;
+  padding: 10px 15px;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #1f2941;
+}
+
+.input_group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input_group label {
+  font-weight: bold;
+}
+
+.input_form {
+  height: 25px;
+}
+
+.btn_submit {
+  min-width: 70px;
+  border-radius: 10px;
+  border: none;
+  height: 40px;
+  padding: 5px;
+  font-weight: bold;
+  transition: 125ms all ease-in-out;
+}
+
+.btn_submit:enabled:hover {
+  border: 2px solid #fff;
+  cursor: pointer;
+  background-color: #3c6e71;
+  color: #fff;
+  transition: 125ms all ease-in-out;
+  box-shadow: 0px 0px 35px -11px rgba(0, 0, 0, 0.46);
+}
+
+
+#productos_contenedor {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  margin: 10px auto;
+}
+
+.cartas {
+  background-color: #246a73;
+  max-width: 200px;
+  min-height: 240px;
+  border-radius: 15px;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.descripcion_producto {
+  padding: 10px;
+}
+
+.descripcion_producto h3,
+.descripcion_producto h5 {
+  margin: 0px;
+}
+
+.descripcion_producto h5 {
+  color: #1f2941;
+}
+
+.cartas img {
+  width: 100%;
+  height: 100%;
+  /* Establece una altura fija */
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  object-fit: cover;
+  /* Escala la imagen sin deformarla */
+}
+
+.producto_precio span {
+  font-weight: bold;
+}
+
+hr {
+  max-width: 90vw;
+}
+
+/* -- Fin seccion Lista -- */
+
+/* -- Boton Agregar Pedido -- */
+
+#agregar_pedido {
+  position: fixed;
+  bottom: 90px;
+  right: 30px;
+  background-color: #1f2941;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 15px;
+  color: #fff;
+  transition: 150ms all ease-in;
+}
+
+#agregar_pedido:hover {
+  background-color: #246a73;
+  transition: 150ms all ease-in;
+  box-shadow: 0px 0px 85px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* -- fin  Boton Agregar Pedido -- */
+
+/* -- Boton ver pedidos--*/
+#ver_pedido {
+  position: fixed;
+  bottom: 140px;
+  right: 40px;
+  background-color: #1f2941;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 15px;
+  color: #fff;
+  transition: 150ms all ease-in;
+}
+
+#ver_pedido:hover {
+  background-color: #246a73;
+  transition: 150ms all ease-in;
+  box-shadow: 0px 0px 85px 8px rgba(0, 0, 0, 0.4);
+}
+
+/*-- fin de boton pedidos --*/
+
+/* -- Inicio Formulario Pedido -- */
+
+#encabezado_alta_pedido {
+  margin: 0px 8vw;
+  padding-top: 15px;
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#encabezado_alta_pedido h2 {
+  font-weight: bold;
+}
+
+#form_alta {
+  max-width: 40%;
+  margin: 10px auto;
+  padding: 10px 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+#form_alta .input_group {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#form_alta button {
+  background-color: #84a98c;
+  border: none;
+  padding: 10px 15px;
+  font-weight: bold;
+  font-family: "Inter", sans-serif;
+  border-radius: 10px;
+  color: #fff;
+  transition: 125ms all ease-in-out;
+}
+
+#form_alta button:hover {
+  cursor: pointer;
+  background-color: #52796f;
+  transition: 125ms all ease-in-out;
+}
+
+#form_alta button:active {
+  outline: 2px solid #588157;
+  transition: 125ms all ease-in-out;
+  outline-offset: 1px;
+}
+
+#form_alta textarea {
+  width: 100%;
+  resize: none;
+}
+
+/* -- Fin Formulario Pedido -- */
+
+/* -- Inicio Alerta Alta Pedido -- */
+
+.mostrarAlerta {
+  opacity: 1;
+  transition: all 125ms ease-in;
+  border: none;
+  background-color: #95b7a6;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin-right: 30px;
+}
+
+.esconderAlerta {
+  opacity: 0;
+  transition: all 125ms ease-in;
+}
+
+/* -- Fin Alerta Alta Pedido -- */
+
+/* -- Inicio Lista Pedidos -- */
+
+#listPedidos {
+  margin-top: 60px;
+  padding-top: 30px;
+  margin-bottom: 60px;
+  padding-bottom: 10px;
+}
+
+#pedidos_contenedor {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  margin: 10px auto;
+}
+
+.descripcion_pedido p,
+.descripcion_pedido h4 {
+  margin: 0px;
+}
+
+/* -- Fin Lista Pedidos -- */
+
+/* -- Media Queries -- */
+@media (max-width: 800px) {
+  #productos_contenedor {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .cartas {
+    margin: 5px auto;
+  }
+
+  .encabezado_lista {
+    flex-direction: column;
+  }
+
+  .encabezado_lista form {
+    flex-direction: column;
+  }
+
+  .input_group {
+    width: 100%;
+  }
+
+  footer {
+    text-align: center;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1280px) {
+  .menu {
+    background: red;
+  }
+}
+
+@media (min-width: 1280px) {
+  .menu {
+    background: green;
+  }
 }
