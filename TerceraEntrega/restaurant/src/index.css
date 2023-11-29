@@ -154,6 +154,10 @@ body {
   box-shadow: 0px 0px 35px -11px rgba(0, 0, 0, 0.46);
 }
 
+.btn_submit:disabled:hover {
+  cursor: not-allowed;
+}
+
 
 #productos_contenedor {
   width: 80%;
@@ -266,7 +270,7 @@ hr {
   font-weight: bold;
 }
 
-#form_alta {
+.form_alta {
   max-width: 40%;
   margin: 10px auto;
   padding: 10px 15px;
@@ -274,12 +278,19 @@ hr {
   border-radius: 5px;
 }
 
-#form_alta .input_group {
+.form_alta .input_group {
+  display: flex;
+  flex-direction: column;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-#form_alta button {
+.form_alta .input_group input,
+.form_alta .input_group select {
+  height: 30px;
+}
+
+.form_alta button {
   background-color: #84a98c;
   border: none;
   padding: 10px 15px;
@@ -290,19 +301,19 @@ hr {
   transition: 125ms all ease-in-out;
 }
 
-#form_alta button:hover {
+.form_alta button:hover {
   cursor: pointer;
   background-color: #52796f;
   transition: 125ms all ease-in-out;
 }
 
-#form_alta button:active {
+.form_alta button:active {
   outline: 2px solid #588157;
   transition: 125ms all ease-in-out;
   outline-offset: 1px;
 }
 
-#form_alta textarea {
+.form_alta textarea {
   width: 100%;
   resize: none;
 }

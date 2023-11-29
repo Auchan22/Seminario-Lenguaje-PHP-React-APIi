@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
 import ItemsPage from "../pages/Items/ItemsPage";
+import NewItem from "../pages/Items/NewItem";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +18,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/new-item",
-            element: <h1>Agregar</h1>,
-            index: true,
+            element: <NewItem />,
           },
           {
             path: "/edit-item/:id",
