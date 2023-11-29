@@ -28,12 +28,11 @@ class ItemsController implements BasicCrudActionsInterface, DeleteCrudActionInte
     //Ademas, se utiliza getParsedBody y no getBody porque parsed se utiliza para acceder a datos codificados
     public function create(Request $request, Response $response): Response
     {
-        $file = $request->getUploadedFiles();
-        $body = $request->getParsedBody();
+        $body = (array)json_decode($request->getBody()->getContents());
 
-        if(count($body) < 3 || count($file) == 0){
+        if(count($body) < 5){
             $response
-                ->getBody()->write(json_encode(["msg" => "Se deben enviar todos los campos: nombre, precio, tipo y foto"]));
+                ->getBody()->write(json_encode(["msg" => "Se deben enviar todos los campos: nombre, precio, tipo, imagen y tipo_imagen"]));
             return $response
                 ->withHeader("Content-Type", "application/json")
                 ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
@@ -66,10 +65,16 @@ class ItemsController implements BasicCrudActionsInterface, DeleteCrudActionInte
         // Por medio de explode, podemos dividir un string en un array al encontrar el caracter separador
         // Como el getClientMediaType() devuelve "image/tipo", y a nosotros unicamente nos interesa el tipo (segunda pos del array), lo capturamos
         // Esto se basa en la interfaz UploadedFileInterface
-        $tipo_imagen = explode("/", $file["imagen"]->getClientMediaType())[1];
-        $imagen = $file["imagen"]->getClientFilename();
-        //TODO
-        //Recibir un base64 de la imagen
+        $tipo_imagen = $body["tipo_imagen"];
+        $imagen = $body["imagen"];
+
+        if( !isset($body["tipo_imagen"]) && !isset( $body["imagen"])){
+        $response
+            ->getBody()->write(json_encode(["msg" => "El campo imagen y tipo_imagen no pueden estar vacios"]));
+        return $response
+            ->withHeader("Content-Type", "application/json")
+            ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+    }
 
         $ir = new ItemsRepository();
         $body = array_merge($body, ["imagen" => $imagen, "tipo_imagen" => $tipo_imagen]);
