@@ -1,17 +1,17 @@
 import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Input from "../../components/Form/Input";
 import Select from "../../components/Form/Select";
-import { ItemsAPI } from "../../api/ItemsAPI";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 import { TIPO_OPTIONS } from "../../utils/constantes";
+import { ItemsAPI } from "../../api/ItemsAPI";
 
-const postItem = async (data) => {
-  const res = await ItemsAPI.post("", JSON.stringify(data));
+const updateItem = async (data, id) => {
+  const res = await ItemsAPI.put(`/${id}`, JSON.stringify(data));
   return res.data;
 };
 
-const INITIAL_DATA = {
+let INITIAL_DATA = {
   nombre: "",
   precio: "",
   tipo: "",
@@ -31,7 +31,20 @@ async function getBase64(file) {
   });
 }
 
-const NewItem = () => {
+const EditItem = () => {
+  const location = useLocation();
+  const state = location.state;
+
+  INITIAL_DATA = {
+    ...INITIAL_DATA,
+    nombre: state.nombre,
+    precio: state.precio,
+    imagen: "",
+    tipo: state.tipo,
+    tipoImagen: state.tipo_imagen,
+    base64Imagen: state.imagen,
+  };
+
   const [data, setData] = useState(INITIAL_DATA);
 
   const navigate = useNavigate();
@@ -62,10 +75,10 @@ const NewItem = () => {
       imagen: data.base64Imagen,
       tipo_imagen: data.tipoImagen,
     };
-    postItem(body)
+    updateItem(body, state.id)
       .then((res) => {
         Swal.fire({
-          title: "Se creó el itém",
+          title: "Se actualizó el itém",
           icon: "success",
         }).then((result) => {
           if (result.isConfirmed) {
@@ -84,7 +97,7 @@ const NewItem = () => {
   return (
     <div>
       <div className="encabezado_lista">
-        <h2>Agregar Item</h2>
+        <h2>Editar Item</h2>
       </div>
       <hr />
       <form className="form_alta" onSubmit={handleSubmit}>
@@ -135,11 +148,11 @@ const NewItem = () => {
             typeof data.precio == "number"
           }
         >
-          Agregar
+          Editar
         </button>
       </form>
     </div>
   );
 };
 
-export default NewItem;
+export default EditItem;

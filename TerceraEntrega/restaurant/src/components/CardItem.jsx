@@ -1,11 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { ItemsAPI } from "../api/ItemsAPI";
+import Swal from "sweetalert2";
 
-const CardItem = ({ data }) => {
+const CardItem = ({ data, handleDelete }) => {
   const navigate = useNavigate();
+
   return (
     <div className="cartas">
-      <img src="imagen" alt="Imagen producto" />
+      <img
+        src={`data:${data.tipo_imagen};base64,${data.imagen}`}
+        alt="Imagen producto"
+      />
       <div className="descripcion_producto">
         <h3>{data.nombre}</h3>
         <h5>{data.tipo}</h5>
@@ -16,11 +22,16 @@ const CardItem = ({ data }) => {
       <div className="btn-actions">
         <button
           className="btn btn_editar"
-          onClick={() => navigate(`/edit-item/id`)}
+          onClick={() => navigate(`/edit-item/${data.id}`, { state: data })}
         >
           Editar
         </button>
-        <button className="btn btn_eliminar">Eliminar</button>
+        <button
+          className="btn btn_eliminar"
+          onClick={() => handleDelete(data.id, data.nombre)}
+        >
+          Eliminar
+        </button>
       </div>
     </div>
   );

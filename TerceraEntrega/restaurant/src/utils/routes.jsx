@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
 import ItemsPage from "../pages/Items/ItemsPage";
 import NewItem from "../pages/Items/NewItem";
+import EditItem from "../pages/Items/EditItem";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/edit-item/:id",
-            element: <h1>Editar</h1>,
+            element: <EditItem />,
           },
         ],
       },
