@@ -68,13 +68,13 @@ class ItemsController implements BasicCrudActionsInterface, DeleteCrudActionInte
         $tipo_imagen = $body["tipo_imagen"];
         $imagen = $body["imagen"];
 
-        if( !isset($body["tipo_imagen"]) && !isset( $body["imagen"])){
-        $response
-            ->getBody()->write(json_encode(["msg" => "El campo imagen y tipo_imagen no pueden estar vacios"]));
-        return $response
-            ->withHeader("Content-Type", "application/json")
-            ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
-    }
+        if( !isset($body["tipo_imagen"]) && !isset( $body["imagen"]) || $body["imagen"] == "" || $body["tipo_imagen"] == ""){
+            $response
+                ->getBody()->write(json_encode(["msg" => "El campo imagen y tipo_imagen no pueden estar vacios"]));
+            return $response
+                ->withHeader("Content-Type", "application/json")
+                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+        }
 
         $ir = new ItemsRepository();
         $body = array_merge($body, ["imagen" => $imagen, "tipo_imagen" => $tipo_imagen]);
