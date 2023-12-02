@@ -112,6 +112,7 @@ const NewItem = () => {
           required
         />
         <Select
+          name="tipo"
           title="Tipo"
           handleChange={handleData}
           value={data.tipo}

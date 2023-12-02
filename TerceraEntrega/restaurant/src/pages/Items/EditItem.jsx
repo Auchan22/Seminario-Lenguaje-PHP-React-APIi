@@ -126,6 +126,7 @@ const EditItem = () => {
         />
         <Select
           title="Tipo"
+          name="tipo"
           handleChange={handleData}
           value={data.tipo}
           options={TIPO_OPTIONS}
