@@ -24,6 +24,8 @@ const PedidosPage = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Si",
+        showCancelButton: true,
+        cancelButtonText: "Cancelar"
     }).then((result) => {
       if (result.isConfirmed) {
         PedidosAPI.delete(`/${id}`)

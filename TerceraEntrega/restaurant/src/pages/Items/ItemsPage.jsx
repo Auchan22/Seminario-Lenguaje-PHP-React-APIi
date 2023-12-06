@@ -28,6 +28,8 @@ const ItemsPage = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Si",
+      showCancelButton: true,
+      cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
         ItemsAPI.delete(`/${id}`)

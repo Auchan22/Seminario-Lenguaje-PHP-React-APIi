@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const ItemsAPI = axios.create({
-    baseURL: "http://localhost:8000/api/items",
+    baseURL: `${process.env.REACT_APP_API_URL}/items`,
     mode: "no-cors",
     headers: { "Content-Type": "application/json", }
 })

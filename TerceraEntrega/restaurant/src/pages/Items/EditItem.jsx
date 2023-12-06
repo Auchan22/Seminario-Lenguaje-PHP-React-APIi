@@ -5,6 +5,7 @@ import Select from "../../components/Form/Select";
 import Swal from "sweetalert2";
 import { TIPO_OPTIONS } from "../../utils/constantes";
 import { ItemsAPI } from "../../api/ItemsAPI";
+import {getBase64} from "../../utils/base64ImageConverter";
 
 const updateItem = async (data, id) => {
   const res = await ItemsAPI.put(`/${id}`, JSON.stringify(data));
@@ -19,17 +20,6 @@ let INITIAL_DATA = {
   base64Imagen: "",
   tipoImagen: "",
 };
-
-async function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      resolve(reader.result);
-    };
-    reader.onerror = reject;
-  });
-}
 
 const EditItem = () => {
   const location = useLocation();

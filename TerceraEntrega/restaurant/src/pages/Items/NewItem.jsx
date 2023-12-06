@@ -5,6 +5,7 @@ import { ItemsAPI } from "../../api/ItemsAPI";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { TIPO_OPTIONS } from "../../utils/constantes";
+import {getBase64} from "../../utils/base64ImageConverter";
 
 const postItem = async (data) => {
   const res = await ItemsAPI.post("", JSON.stringify(data));
@@ -19,17 +20,6 @@ const INITIAL_DATA = {
   base64Imagen: "",
   tipoImagen: "",
 };
-
-async function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      resolve(reader.result);
-    };
-    reader.onerror = reject;
-  });
-}
 
 const NewItem = () => {
   const [data, setData] = useState(INITIAL_DATA);

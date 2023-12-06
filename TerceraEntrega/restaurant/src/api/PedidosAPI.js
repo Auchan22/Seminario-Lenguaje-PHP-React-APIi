@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const PedidosAPI = axios.create({
-    baseURL: "http://localhost:8000/api/pedidos",
+    baseURL: `${process.env.REACT_APP_API_URL}/pedidos`,
     mode: "no-cors",
     headers: { "Content-Type": "application/json", }
 })
