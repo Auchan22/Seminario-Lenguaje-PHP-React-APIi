@@ -8,4 +8,4 @@ Proyecto para la 3er entrega práctica de la matería
 * Axios: Paquete utilizado para realizar peticiones a endpoints
 ---
 ### 🔧 Configuración
-Para que el consumo a la API funcione, se debe crear un archivo `.env` y agregarle la key `API_URL`
+Para que el consumo a la API funcione, se debe crear un archivo `.env` y agregarle la key `REACT_APP_API_URL`
