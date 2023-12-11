@@ -23,20 +23,31 @@ const INITIAL_DATA = {
 
 const NewItem = () => {
   const [data, setData] = useState(INITIAL_DATA);
+  const [disabled, setDisabled] = useState(false);
 
   const navigate = useNavigate();
 
   const handleData = (e) => {
-    if (e.target.name == "Imagen") {
+    if (e.target.name == "imagen") {
       let file = e.target.files[0];
+      // Si la imagen es mayor a 2mb
+      if(file.size > 2000000){
+        setDisabled(true);
+        Swal.fire({
+          title: "Hubo un error",
+          text: "El tamaño de la imagen no puede ser superior a 2MB",
+          icon: "error"
+        })
+      }
       getBase64(file)
-        .then((res) =>
-          setData({
-            ...data,
-            base64Imagen: res.split(",")[1],
-            tipoImagen: file.type,
-            [e.target.name.toLowerCase()]: e.target.value,
-          })
+        .then((res) => {
+              setData({
+                ...data,
+                base64Imagen: res.split(",")[1],
+                tipoImagen: file.type,
+                [e.target.name.toLowerCase()]: e.target.value,
+              })
+            }
         )
         .catch((err) => console.error(err));
     }
@@ -116,6 +127,7 @@ const NewItem = () => {
           value={data.imagen}
           placeholder="Ingrese una imagen"
           required
+          accept="image/jpeg, image/png"
         />
         <button
           type="submit"
@@ -124,6 +136,7 @@ const NewItem = () => {
             data.nombre == "" ||
             data.precio == 0 ||
             typeof data.precio == "number"
+              || disabled
           }
         >
           Agregar

@@ -73,7 +73,7 @@ const ItemsPage = () => {
     setLoading(true);
     fetchItems(queryParams)
       .then((res) => {
-        setItems(res);
+        setItems(res.length > 0 ? res : []);
         setLoading(false);
       })
       .catch((err) => {

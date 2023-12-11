@@ -36,12 +36,21 @@ const EditItem = () => {
   };
 
   const [data, setData] = useState(INITIAL_DATA);
+  const [disabled, setDisabled] = useState(false);
 
   const navigate = useNavigate();
 
   const handleData = (e) => {
-    if (e.target.name == "Imagen") {
+    if (e.target.name == "imagen") {
       let file = e.target.files[0];
+      if(file.size > 2000000){
+        setDisabled(true);
+        Swal.fire({
+          title: "Hubo un error",
+          text: "El tamaño de la imagen no puede ser superior a 2MB",
+          icon: "error"
+        })
+      }
       getBase64(file)
         .then((res) =>
           setData({
@@ -129,6 +138,7 @@ const EditItem = () => {
           value={data.imagen}
           placeholder="Ingrese una imagen"
           required
+          accept="image/jpeg, image/png"
         />
         <button
           type="submit"
@@ -137,6 +147,7 @@ const EditItem = () => {
             data.nombre == "" ||
             data.precio == 0 ||
             typeof data.precio == "number"
+              || disabled
           }
         >
           Editar

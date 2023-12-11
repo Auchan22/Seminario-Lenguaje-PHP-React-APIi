@@ -45,7 +45,7 @@ const PedidosPage = () => {
     setLoading(true);
     fetchPedidos()
       .then((res) => {
-        setItems(res);
+        setItems(res.length > 0 ? res : []);
         setLoading(false);
       })
       .catch((err) => {

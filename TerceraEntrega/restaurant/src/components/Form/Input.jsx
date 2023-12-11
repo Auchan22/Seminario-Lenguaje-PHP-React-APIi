@@ -10,7 +10,7 @@ const Input = ({ title, value, handleChange, type, required, ...props }) => {
         type={type}
         value={value}
         onChange={handleChange}
-        name={title}
+        name={title.toLowerCase()}
         {...props}
       />
     </div>
