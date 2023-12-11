@@ -20,7 +20,7 @@ class PedidosController implements BasicCrudActionsInterface, DeleteCrudActionIn
             $response->getBody()->write(json_encode(["msg" => "No hay pedidos disponibles"]));
             return $response
                 ->withHeader("Content-Type", "application/json")
-                ->withStatus(ResponseStatus::HTTP_BAD_REQUEST);
+                ->withStatus(ResponseStatus::HTTP_OK);
         }
 
         $response->getBody()->write(json_encode($res));

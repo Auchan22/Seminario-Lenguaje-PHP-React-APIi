@@ -16,7 +16,7 @@ class ItemsController implements BasicCrudActionsInterface, DeleteCrudActionInte
         $params = $request->getQueryParams();
         $ir = new ItemsRepository();
         $result = $ir->getItems($params);
-        $res = [json_encode($result), count($result) == 0 ? ResponseStatus::HTTP_NOT_FOUND : ResponseStatus::HTTP_OK];
+        $res = [json_encode($result), ResponseStatus::HTTP_OK];
         $response->getBody()->write($res[0]);
         return $response
             ->withHeader("Content-Type", "application/json")
